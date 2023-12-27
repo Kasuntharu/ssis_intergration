@@ -11,11 +11,26 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="62"
-  DTS:VersionGUID="{D6F90957-5ADF-498F-BD70-4169510DAEA1}">
+  DTS:VersionBuild="67"
+  DTS:VersionGUID="{A3C54F31-4720-40DD-8D61-741B2306D905}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[kasuntharu.database.windows.net.kasuntharu.admin_kasuntharu]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{EFB586DF-3890-4415-A4A2-2DA4CC9A9350}"
+      DTS:ObjectName="kasuntharu.database.windows.net.kasuntharu.admin_kasuntharu">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=kasuntharu.database.windows.net;User ID=admin_kasuntharu;Initial Catalog=kasuntharu;Application Name=SSIS-Package-{EFB586DF-3890-4415-A4A2-2DA4CC9A9350}kasuntharu.database.windows.net.kasuntharu.admin_kasuntharu;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAigImlkVy9E+CK1/mki2M+QAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAvMCtjUfrp8gHc1mG3auL15jV+yJPyS4mFxy+kGJuicgAAAAAOgAAAAAIAACAAAADu6T7zazypTpPaVUqhYjsYrRUBAyZ36ISM5HmuYllgpCAAAACKW9ZyNq/Uw3vkn5Q5tiVAqXmtlivm4x6FkOyIwwO95EAAAABlOGR9++s6f9CRniaQeDaZvKmqF5fsB5KqqLpDs5wSMrUjp1PkXKXNokKKVOcQ4+IQ6mgmqua97Nsyp9Df6Yb6</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Prometheus]"
       DTS:CreationName="OLEDB"
@@ -56,9 +71,401 @@
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{14801E72-843F-422C-8FE1-AC38711F167A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Azure_Dim_Customer"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="Azure_Dim_Customer"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Dim_Customer"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Azure_Dim_Customer.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[kasuntharu.database.windows.net.kasuntharu.admin_kasuntharu]"
+                  connectionManagerRefId="Package.ConnectionManagers[kasuntharu.database.windows.net.kasuntharu.admin_kasuntharu]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].Columns[CustomerId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="CustomerId"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerId]"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].Columns[CustomerName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].Columns[CustomerPhone]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CustomerPhone"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerPhone]"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerPhone]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].Columns[CustomerMail]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CustomerMail"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerMail]"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerMail]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].Columns[SegmentId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SegmentId"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[SegmentId]"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[SegmentId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].Columns[SegmentName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="SegmentName"
+                      externalMetadataColumnId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[SegmentName]"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[SegmentName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerId]"
+                      dataType="wstr"
+                      length="50"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerPhone]"
+                      dataType="wstr"
+                      length="20"
+                      name="CustomerPhone" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[CustomerMail]"
+                      dataType="wstr"
+                      length="100"
+                      name="CustomerMail" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[SegmentId]"
+                      dataType="wstr"
+                      length="50"
+                      name="SegmentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input].ExternalColumns[SegmentName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SegmentName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Azure_Dim_Customer.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Azure_Dim_Customer.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Azure_Dim_Customer.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Azure_Dim_Customer.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Local_Dim_Customer"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Local_Dim_Customer"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Dim_Customer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Local_Dim_Customer.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Prometheus.ToyStoreTarget]"
+                  connectionManagerRefId="Package.ConnectionManagers[Prometheus.ToyStoreTarget]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerId]"
+                      name="CustomerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerPhone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerPhone]"
+                      length="20"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerPhone]"
+                      name="CustomerPhone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerMail]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerMail]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[CustomerMail]"
+                      name="CustomerMail"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[SegmentId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[SegmentId]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[SegmentId]"
+                      name="SegmentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[SegmentName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[SegmentName]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].Columns[SegmentName]"
+                      name="SegmentName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerId]"
+                      dataType="wstr"
+                      length="50"
+                      name="CustomerId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerPhone]"
+                      dataType="wstr"
+                      length="20"
+                      name="CustomerPhone" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[CustomerMail]"
+                      dataType="wstr"
+                      length="100"
+                      name="CustomerMail" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[SegmentId]"
+                      dataType="wstr"
+                      length="50"
+                      name="SegmentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output].ExternalColumns[SegmentName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SegmentName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerId]"
+                      name="CustomerId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerPhone]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerPhone]"
+                      name="CustomerPhone" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerMail]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[CustomerMail]"
+                      name="CustomerMail" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[SegmentId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[SegmentId]"
+                      name="SegmentId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[SegmentName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[SegmentName]"
+                      name="SegmentName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Azure_Dim_Customer.Inputs[ADO NET Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\Local_Dim_Customer.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Dim_Customer"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
       DTS:DTSID="{2C4F4836-65FA-417A-9B4C-870B90897C3D}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -1082,6 +1489,7 @@
       DTS:refId="Package\Dim_Product"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
       DTS:DTSID="{28A20C61-E57F-49DA-8813-1995961F24FD}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -3683,6 +4091,7 @@
       DTS:refId="Package\Dim_Store"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
       DTS:DTSID="{027D5326-A8AA-4202-9E50-AD9714CDB1CC}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -4622,6 +5031,7 @@
       DTS:refId="Package\Fact_Sales"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
       DTS:DTSID="{6D1A8F43-7C86-4DAA-AF1F-62C1C658E30C}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -7905,6 +8315,10 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="5.5,5.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -8572,19 +8986,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Dim_Product\Source_ProductCatogory">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Dim_Product\Source_Promotion">
     <Properties>
       <Property>
@@ -8611,7 +9012,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Dim_Product\Dim_Product">
+    design-time-name="Package\Dim_Product\Source_ProductCatogory">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -8625,6 +9026,19 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Dim_Product\Source_ProductType">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Dim_Product\Dim_Product">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -9262,19 +9676,6 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Fact_Sales\Sales_Hed">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
     design-time-name="Package\Fact_Sales\Sales_Det">
     <Properties>
       <Property>
@@ -9288,7 +9689,20 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Fact_Sales\Dim_product">
+    design-time-name="Package\Fact_Sales\Sales_Hed">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fact_Sales\Fact_Sales">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -9314,7 +9728,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Fact_Sales\Fact_Sales">
+    design-time-name="Package\Fact_Sales\Dim_product">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -9323,6 +9737,65 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="178.4,41.6"
+          Id="Package\Data Flow Task\Local_Dim_Customer"
+          TopLeft="27.4999996721745,44.4999994188547" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\Data Flow Task\Azure_Dim_Customer"
+          TopLeft="384.499994799495,47.4999998211861" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="205.899999672174,66.7999996200204">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="178.59999512732,0"
+              Start="0,0"
+              End="171.09999512732,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="171.09999512732,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Local_Dim_Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Azure_Dim_Customer">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
